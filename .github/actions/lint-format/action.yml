@@ -1,0 +1,12 @@
+name: "Lint and format"
+description: "ESLint and Prettier"
+runs:
+  using: "composite"
+  steps:
+    - name: Lint
+      run: bun run lint
+      shell: bash
+
+    - name: Format
+      run: bun run format:check
+      shell: bash

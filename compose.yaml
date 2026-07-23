@@ -1,0 +1,27 @@
+name: proteinshake
+
+services:
+  db:
+    container_name: proteinshake-db
+    image: postgres:18-alpine
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-proteinshake_db}
+
+    ports:
+      - ${POSTGRES_PORT:-5432}:5432
+
+    volumes:
+      - proteinshake-db-data:/var/lib/postgresql
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d ${POSTGRES_URL}"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  proteinshake-db-data:
