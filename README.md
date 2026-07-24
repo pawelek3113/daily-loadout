@@ -1,14 +1,6 @@
-# proteinshake project
+# dailyloadout project
 
 Created with web-template
-
-> [!IMPORTANT]
-> Replace all occurrences of `proteinshake` with the name of your project. Then remove this section.
-
-<!--  -->
-
-> [!WARNING]
-> After copying `.env.example` into `.env`, don't forget to change your credentials.
 
 ---
 

@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: { template: "%s | proteinshake", default: "proteinshake" },
-  description: "proteinshake app",
+  title: { template: "%s | dailyloadout", default: "dailyloadout" },
+  description: "dailyloadout app",
 };
 
 export default function RootLayout({
