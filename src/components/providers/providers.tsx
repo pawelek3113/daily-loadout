@@ -1,17 +1,11 @@
 import { TRPCReactProvider } from "@/trpc/client";
+import { NextIntlClientProvider } from "next-intl";
 import { ReactNode } from "react";
-import { ThemeProvider } from "./theme-provider";
 
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <TRPCReactProvider>
-      <ThemeProvider
-        enableSystem
-        attribute="class"
-        // disableTransitionOnChange
-      >
-        {children}
-      </ThemeProvider>
+      <NextIntlClientProvider>{children}</NextIntlClientProvider>
     </TRPCReactProvider>
   );
 };

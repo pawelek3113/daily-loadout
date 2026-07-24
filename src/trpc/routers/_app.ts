@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { z } from "zod";
 import { baseProcedure, createTRPCRouter } from "../init";
 
@@ -6,11 +7,13 @@ export const appRouter = createTRPCRouter({
     .input(
       z.object({
         text: z.string(),
+        locale: z.string(),
       })
     )
-    .query((opts) => {
+    .query(async (opts) => {
+      const t = await getTranslations();
       return {
-        greeting: `hello ${opts.input.text}`,
+        greeting: `text: ${t("HomePage.title", { value: opts.input.text })}`,
       };
     }),
 });

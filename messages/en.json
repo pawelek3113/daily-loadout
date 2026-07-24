@@ -1,0 +1,10 @@
+{
+  "locale": {
+    "en": "english",
+    "pl": "polish"
+  },
+  "HomePage": {
+    "title": "Hello {value}!",
+    "loading": "Loading"
+  }
+}

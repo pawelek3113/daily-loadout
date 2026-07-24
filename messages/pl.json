@@ -1,0 +1,10 @@
+{
+  "locale": {
+    "en": "angielski",
+    "pl": "polski"
+  },
+  "HomePage": {
+    "title": "Cześć {value}!",
+    "loading": "Ładowanie"
+  }
+}

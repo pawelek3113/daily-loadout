@@ -2,6 +2,7 @@ import { Providers } from "@/components/providers/providers";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@wrksz/themes/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,7 +26,15 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
-        <Providers>{children}</Providers>
+        <ThemeProvider
+          enableSystem
+          attribute="class"
+          storage="hybrid"
+          defaultTheme="system"
+          // disableTransitionOnChange
+        >
+          <Providers>{children}</Providers>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -27,6 +27,7 @@ bun run dev
 - Playwright
 - ESLint
 - Docker
+- i18n with `next-intl`
 
 ## Template includes
 
@@ -38,3 +39,4 @@ bun run dev
 - dummy e2e Playwright test
 - GitHub Actions workflow
 - `compose.yaml` for local development with PostgreSQL database
+- i18n configuration with `next-intl` and example translation files
