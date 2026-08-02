@@ -6,5 +6,16 @@
   "HomePage": {
     "title": "Cześć {value}!",
     "loading": "Ładowanie"
+  },
+  "SignInForm": {
+    "email": "Email",
+    "password": "Hasło",
+    "submit": "Zaloguj się",
+    "errors": {
+      "email": "Niepoprawny adres email",
+      "password": {
+        "min": "Za krótkie, proszę podaj dłuższe hasło"
+      }
+    }
   }
 }

@@ -6,5 +6,16 @@
   "HomePage": {
     "title": "Hello {value}!",
     "loading": "Loading"
+  },
+  "SignInForm": {
+    "email": "Email",
+    "password": "Password",
+    "submit": "Log in",
+    "errors": {
+      "email": "Invalid email address",
+      "password": {
+        "min": "Too short, please provide a longer password"
+      }
+    }
   }
 }
