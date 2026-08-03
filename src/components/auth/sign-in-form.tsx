@@ -7,31 +7,36 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import z from "zod";
 import { Button } from "../ui/button";
 
 export const SignInForm = () => {
-  const t = useTranslations("SignInForm");
+  const t = useTranslations("AuthForm");
   const formSchema = useMemo(
     () =>
       z.object({
         email: z.email({ error: t("errors.email") }),
-        password: z.string().min(8, t("errors.password.min")),
+        password: z
+          .string()
+          .nonempty(t("errors.password.nonempty"))
+          .min(8, t("errors.password.min")),
       }),
     [t]
   );
 
   type SignInFormData = z.infer<typeof formSchema>;
-  const { control, handleSubmit, setError } = useForm<SignInFormData>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-    mode: "onTouched",
-  });
+  const { control, handleSubmit, setError, formState } =
+    useForm<SignInFormData>({
+      resolver: zodResolver(formSchema),
+      defaultValues: {
+        email: "",
+        password: "",
+      },
+      mode: "onTouched",
+    });
 
   const router = useRouter();
 
@@ -46,8 +51,18 @@ export const SignInForm = () => {
       setError("email", { type: "value" });
       setError("password", {
         type: "value",
-        message: "Incorrect email or password",
+        message: t("errors.invalid_email_or_pswd"),
       });
+    }
+    if (error?.code && error?.code !== "INVALID_EMAIL_OR_PASSWORD") {
+      setError("email", { type: "value" });
+      setError(
+        "password",
+        {
+          message: t("errors.general", { code: error?.code ?? error.status }),
+        },
+        { shouldFocus: true }
+      );
     }
   };
 
@@ -88,7 +103,18 @@ export const SignInForm = () => {
             </Field>
           )}
         />
-        <Button type="submit">{t("submit")}</Button>
+        <Button type="submit" disabled={formState.isSubmitting}>
+          {t("login")}
+        </Button>
+        <p className="text-muted-foreground text-xs font-medium">
+          {t.rich("no_account", {
+            link: (chunks) => (
+              <Link href="/sign-up" className="text-hyperlink">
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
       </form>
     </>
   );

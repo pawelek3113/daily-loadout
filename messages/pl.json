@@ -7,14 +7,27 @@
     "title": "Cześć {value}!",
     "loading": "Ładowanie"
   },
-  "SignInForm": {
+  "AuthForm": {
     "email": "Email",
     "password": "Hasło",
-    "submit": "Zaloguj się",
+    "name": "Nazwa",
+    "login": "Zaloguj się",
+    "signup": "Zarejestruj się",
+    "no_account": "Nie masz konta? <link>Zarejestruj się</link>.",
+    "account_exists": "Masz już konto? <link>Zaloguj się</link>.",
     "errors": {
+      "general": "Coś poszło nie tak. ({code})",
+      "invalid_email_or_pswd": "Niepoprawny adres email lub hasło",
       "email": "Niepoprawny adres email",
+      "account_exists": "Konto z tym adresem email już istnieje, spróbuj się zalogować.",
       "password": {
+        "nonempty": "Hasło nie może być puste, proszę wprowadź swoje hasło",
         "min": "Za krótkie, proszę podaj dłuższe hasło"
+      },
+      "name": {
+        "min": "Za krótka, proszę podaj dłuższą nazwę",
+        "max": "Za długa, proszę podaj krótszą nazwę",
+        "nonempty": "Nazwa nie może być pusta, proszę wprowadź swoją nazwę"
       }
     }
   }

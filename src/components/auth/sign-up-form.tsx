@@ -5,43 +5,104 @@ import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
+import { useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import z from "zod";
 
-const formSchema = z.object({ email: z.email(), password: z.string().min(8) });
-
-type SignUpFormData = z.infer<typeof formSchema>;
-
 export const SignUpForm = () => {
-  const { control, handleSubmit } = useForm<SignUpFormData>({
+  const t = useTranslations("AuthForm");
+
+  const formSchema = useMemo(
+    () =>
+      z.object({
+        name: z
+          .string()
+          .nonempty(t("errors.name.nonempty"))
+          .min(2, t("errors.name.min"))
+          .max(32, t("errors.name.max")),
+        email: z.email({ error: t("errors.email") }),
+        password: z
+          .string()
+          .nonempty(t("errors.password.nonempty"))
+          .min(8, t("errors.password.min")),
+      }),
+    [t]
+  );
+
+  type SignUpFormData = z.infer<typeof formSchema>;
+
+  const { control, handleSubmit, setError } = useForm<SignUpFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
     mode: "onTouched",
   });
 
-  const onSubmit = async ({ email, password }: SignUpFormData) => {
-    await authClient.signUp.email({
+  const onSubmit = async ({ name, email, password }: SignUpFormData) => {
+    const { error } = await authClient.signUp.email({
       email,
-      // TODO: provide name input field and others
-      name: "test",
+      name,
       password,
       callbackURL: "/",
     });
+
+    if (error?.code === "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL") {
+      setError(
+        "email",
+        {
+          message: t("errors.account_exists"),
+        },
+        { shouldFocus: true }
+      );
+    }
+    if (
+      error?.code &&
+      error?.code !== "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL"
+    ) {
+      setError("email", { type: "value" });
+      setError(
+        "password",
+        {
+          message: t("errors.general", { code: error?.code ?? error.status }),
+        },
+        { shouldFocus: true }
+      );
+    }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
+          name="name"
+          control={control}
+          render={({ field, fieldState }) => (
+            <Field data-invalid={fieldState.invalid}>
+              <FieldLabel htmlFor="email">{t("name")}</FieldLabel>
+              <Input
+                {...field}
+                id="name"
+                aria-invalid={fieldState.invalid}
+                placeholder="AmazingJoe"
+
+                autoComplete="off"
+              />
+              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+            </Field>
+          )}
+        />
+        <Controller
           name="email"
           control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
+              <FieldLabel htmlFor="email">{t("email")}</FieldLabel>
               <Input
                 {...field}
                 id="email"
@@ -58,7 +119,7 @@ export const SignUpForm = () => {
           control={control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="password">Password</FieldLabel>
+              <FieldLabel htmlFor="password">{t("password")}</FieldLabel>
               <Input
                 {...field}
                 id="password"
@@ -70,7 +131,16 @@ export const SignUpForm = () => {
             </Field>
           )}
         />
-        <Button type="submit">Sign up</Button>
+        <Button type="submit">{t("signup")}</Button>
+        <p className="text-muted-foreground text-xs font-medium">
+          {t.rich("account_exists", {
+            link: (chunks) => (
+              <Link href="/sign-in" className="text-hyperlink">
+                {chunks}
+              </Link>
+            ),
+          })}
+        </p>
       </form>
     </>
   );
