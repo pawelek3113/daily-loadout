@@ -7,6 +7,7 @@ import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -14,6 +15,8 @@ import z from "zod";
 
 export const SignUpForm = () => {
   const t = useTranslations("AuthForm");
+
+  const router = useRouter();
 
   const formSchema = useMemo(
     () =>
@@ -49,31 +52,35 @@ export const SignUpForm = () => {
       email,
       name,
       password,
-      callbackURL: "/",
     });
 
-    if (error?.code === "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL") {
-      setError(
-        "email",
-        {
-          message: t("errors.account_exists"),
-        },
-        { shouldFocus: true }
-      );
+    if (error) {
+      if (error?.code === "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL") {
+        setError(
+          "email",
+          {
+            message: t("errors.account_exists"),
+          },
+          { shouldFocus: true }
+        );
+      }
+      if (
+        error?.code &&
+        error?.code !== "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL"
+      ) {
+        setError("email", { type: "value" });
+        setError(
+          "password",
+          {
+            message: t("errors.general", { code: error?.code ?? error.status }),
+          },
+          { shouldFocus: true }
+        );
+      }
+      return;
     }
-    if (
-      error?.code &&
-      error?.code !== "USER_ALREADY_EXISTS_USE_ANOTHER_EMAIL"
-    ) {
-      setError("email", { type: "value" });
-      setError(
-        "password",
-        {
-          message: t("errors.general", { code: error?.code ?? error.status }),
-        },
-        { shouldFocus: true }
-      );
-    }
+
+    router.push("/verify");
   };
 
   return (
@@ -132,6 +139,7 @@ export const SignUpForm = () => {
           )}
         />
         <Button type="submit">{t("signup")}</Button>
+        {/* TODO: maybe put that on page instead here */}
         <p className="text-muted-foreground text-xs font-medium">
           {t.rich("account_exists", {
             link: (chunks) => (

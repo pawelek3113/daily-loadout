@@ -11,8 +11,10 @@
     "email": "Email",
     "password": "Password",
     "name": "Name",
+    "otp": "Code",
     "login": "Log in",
     "signup": "Sign up",
+    "verify": "Verify",
     "no_account": "Don't have an account? <link>Sign up</link>.",
     "account_exists": "Already have an account? <link>Log in</link>.",
     "errors": {
@@ -28,7 +30,18 @@
         "min": "Too short, please provide a longer name",
         "max": "Too long, please provide a shorter name",
         "nonempty": "Name must not be empty, please type in your name"
-      }
+      },
+      "otp": "Incorrect token"
+    }
+  },
+  "emails": {
+    "email_verification": {
+      "title": "Account verification",
+      "preview": "Your verification code is {otp}",
+      "heading": "Verify",
+      "subheading": "your email",
+      "text": "Enter this code to verify your account:",
+      "note": "If you didn't request this, you can ignore this email."
     }
   }
 }

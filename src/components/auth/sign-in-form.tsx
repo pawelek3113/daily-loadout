@@ -106,6 +106,7 @@ export const SignInForm = () => {
         <Button type="submit" disabled={formState.isSubmitting}>
           {t("login")}
         </Button>
+        {/* TODO: maybe put that on page instead here */}
         <p className="text-muted-foreground text-xs font-medium">
           {t.rich("no_account", {
             link: (chunks) => (

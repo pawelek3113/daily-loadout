@@ -11,8 +11,10 @@
     "email": "Email",
     "password": "Hasło",
     "name": "Nazwa",
+    "otp": "Kod",
     "login": "Zaloguj się",
     "signup": "Zarejestruj się",
+    "verify": "Zweryfikuj",
     "no_account": "Nie masz konta? <link>Zarejestruj się</link>.",
     "account_exists": "Masz już konto? <link>Zaloguj się</link>.",
     "errors": {
@@ -28,7 +30,18 @@
         "min": "Za krótka, proszę podaj dłuższą nazwę",
         "max": "Za długa, proszę podaj krótszą nazwę",
         "nonempty": "Nazwa nie może być pusta, proszę wprowadź swoją nazwę"
-      }
+      },
+      "otp": "Niepoprawny kod"
+    }
+  },
+  "emails": {
+    "email_verification": {
+      "title": "Weryfikacja konta",
+      "preview": "Twój kod weryfikacyjny to {otp}",
+      "heading": "Zweryfikuj",
+      "subheading": "swój email",
+      "text": "Wpisz ten kod, aby zweryfikować swoje konto:",
+      "note": "Jeśli nie oczekiwałeś tej wiadomości, możesz ją zignorować."
     }
   }
 }

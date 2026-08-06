@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+import { auth } from "@/server/auth/auth";
 import { db } from "@/server/db";
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
