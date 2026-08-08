@@ -6,9 +6,15 @@ export const metadata: Metadata = {
   title: "Verify",
 };
 
-const VerifyPage = async () => {
+interface VerifyPageProps {
+  searchParams: Promise<{ code?: string }>;
+}
+
+const VerifyPage = async (props: VerifyPageProps) => {
+  const { code = null } = await props.searchParams;
+
   const session = await getServerSession();
-  return <VerifyEmailForm email={session!.user.email} />;
+  return <VerifyEmailForm email={session!.user.email} code={code} />;
 };
 
 export default VerifyPage;

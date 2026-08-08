@@ -15,9 +15,9 @@ import { useOtpCountdown } from "../hooks/use-otp-countdown";
 import { Button } from "../ui/button";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 
-type VerifyEmailFormProps = { email: string };
+type VerifyEmailFormProps = { email: string; code: string | null };
 
-export const VerifyEmailForm = ({ email }: VerifyEmailFormProps) => {
+export const VerifyEmailForm = ({ email, code }: VerifyEmailFormProps) => {
   const t = useTranslations("AuthForm");
 
   const { remaining, restart } = useOtpCountdown(300);
@@ -38,7 +38,7 @@ export const VerifyEmailForm = ({ email }: VerifyEmailFormProps) => {
     useForm<VerifyEmailFormData>({
       resolver: zodResolver(formSchema),
       defaultValues: {
-        otp: "",
+        otp: code ?? "",
       },
     });
 

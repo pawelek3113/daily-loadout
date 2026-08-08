@@ -58,7 +58,7 @@ const VerificationOtpEmail = async ({
               {t.rich("info", {
                 link: (chunks) => (
                   <Link
-                    href={process.env.APP_DOMAIN}
+                    href={`${process.env.APP_DOMAIN}/verify?code=${otp}`}
                     className="font-semibold text-[#6f15c2]"
                   >
                     {chunks}
