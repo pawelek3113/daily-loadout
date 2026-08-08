@@ -23,5 +23,28 @@ services:
       timeout: 5s
       retries: 5
 
+  db-test:
+    container_name: dailyloadout-db-test
+    image: postgres:18-alpine
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_PASSWORD: test
+      POSTGRES_USER: test
+      POSTGRES_DB: test
+
+    ports:
+      - 5433:5432
+
+    volumes:
+      - dailyloadout-db-data-test:/var/lib/postgresql
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d ${DATABASE_URL}"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+
 volumes:
   dailyloadout-db-data:
+  dailyloadout-db-data-test:

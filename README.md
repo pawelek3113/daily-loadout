@@ -10,7 +10,7 @@ Created with web-template
 bun install
 cp .env.example .env
 # Update .env with your credentials
-docker compose up -d
+docker compose up -d db
 bun run dev
 ```
 

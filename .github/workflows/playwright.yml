@@ -5,17 +5,39 @@ on:
   pull_request:
     branches: [main]
 
-env:
-  DATABASE_URL: "postgresql://dummy:dummy@localhost/dummy"
-
 jobs:
   test:
+    services:
+      postgres:
+        image: postgres:18-alpine
+        env:
+          POSTGRES_PASSWORD: test
+          POSTGRES_USER: test
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 15s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: "postgresql://e2e:test@localhost:5432/test"
+      E2E_TESTS: 1
+
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
 
       - uses: ./.github/actions/setup-project
+
+      - name: Load .env.test into workflow env
+        run: cat .env.test >> $GITHUB_ENV
+
+      - name: Run migrations
+        run: bun run db:migrate
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps

@@ -68,8 +68,6 @@ export const SignInForm = () => {
 
   return (
     <>
-      <p className="font text-9xl font-thin tracking-tighter">21:37</p>
-      <p className="font text-5xl font-thin tracking-tighter">Code expired</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="email"
