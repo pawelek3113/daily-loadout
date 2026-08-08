@@ -5,23 +5,23 @@ import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
+import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import toast from "react-hot-toast";
 import z from "zod";
+import { useOtpCountdown } from "../hooks/use-otp-countdown";
 import { Button } from "../ui/button";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from "../ui/input-otp";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 
 type VerifyEmailFormProps = { email: string };
 
 export const VerifyEmailForm = ({ email }: VerifyEmailFormProps) => {
   const t = useTranslations("AuthForm");
+
+  const { remaining, restart } = useOtpCountdown(300);
+  const isExpired = remaining === 0;
 
   const router = useRouter();
 
@@ -41,6 +41,15 @@ export const VerifyEmailForm = ({ email }: VerifyEmailFormProps) => {
         otp: "",
       },
     });
+
+  const handleResend = async () => {
+    await authClient.emailOtp.sendVerificationOtp({
+      email,
+      type: "email-verification",
+    });
+
+    restart(300);
+  };
 
   const onSubmit = async ({ otp }: VerifyEmailFormData) => {
     const { data, error } = await authClient.emailOtp.verifyEmail({
@@ -65,7 +74,16 @@ export const VerifyEmailForm = ({ email }: VerifyEmailFormProps) => {
 
   return (
     <>
-      {/* 5 minute timer */}
+      <p
+        className={cn(
+          "font text-9xl font-thin tracking-tighter",
+          !remaining && "text-5xl"
+        )}
+      >
+        {remaining
+          ? `${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, "0")}`
+          : t("code_expired")}
+      </p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name="otp"
@@ -78,9 +96,6 @@ export const VerifyEmailForm = ({ email }: VerifyEmailFormProps) => {
                   <InputOTPSlot index={0} />
                   <InputOTPSlot index={1} />
                   <InputOTPSlot index={2} />
-                </InputOTPGroup>
-                <InputOTPSeparator />
-                <InputOTPGroup>
                   <InputOTPSlot index={3} />
                   <InputOTPSlot index={4} />
                   <InputOTPSlot index={5} />
@@ -90,10 +105,12 @@ export const VerifyEmailForm = ({ email }: VerifyEmailFormProps) => {
             </Field>
           )}
         />
-        <Button type="submit" disabled={formState.isSubmitting}>
+        <Button type="submit" disabled={formState.isSubmitting || isExpired}>
           {t("verify")}
         </Button>
-        {/* TODO: resend token button, maybe on page instead of here */}
+        <Button type="button" onClick={handleResend} disabled={!isExpired}>
+          {t("resend")}
+        </Button>
       </form>
     </>
   );

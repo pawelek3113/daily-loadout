@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Field, FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { authClient } from "@/lib/auth-client";
+import { setOtpExpiry } from "@/lib/otp-timer";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -80,6 +81,7 @@ export const SignUpForm = () => {
       return;
     }
 
+    setOtpExpiry(300);
     router.push("/verify");
   };
 

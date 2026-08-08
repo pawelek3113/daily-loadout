@@ -6,6 +6,7 @@ import {
   Head,
   Heading,
   Html,
+  Link,
   pixelBasedPreset,
   Preview,
   Section,
@@ -38,9 +39,9 @@ const VerificationOtpEmail = async ({
         <Preview>{t("preview", { otp })}</Preview>
         <Body
           lang={locale}
-          className="bg-background text-foreground mx-auto p-4 text-center font-sans"
+          className="bg-background text-foreground mx-auto max-w-lg p-4 text-center font-sans"
         >
-          <Container className="max-w-lg">
+          <Container>
             <Container>
               <Heading className="text-6xl leading-1.5">{t("heading")}</Heading>
               <Heading className="text-4xl leading-0 font-extrabold text-[#973c00]">
@@ -53,7 +54,27 @@ const VerificationOtpEmail = async ({
                 {otp}
               </Text>
             </Section>
-            <Text className="text-sm text-[#4a4a4a]">{t("note")}</Text>
+            <Text className="text-sm text-[#4a4a4a]">
+              {t.rich("info", {
+                link: (chunks) => (
+                  <Link
+                    href={process.env.APP_DOMAIN}
+                    className="font-semibold text-[#6f15c2]"
+                  >
+                    {chunks}
+                  </Link>
+                ),
+              })}
+            </Text>
+            <Text className="pt-4 text-sm text-[#5f5f5f]">{t("note")}</Text>
+          </Container>
+
+          {/* footer */}
+          <Container className="pt-6">
+            <Text className="m-0 text-base text-[#8a8a8a]">{t("footer")}</Text>
+            <Text className="m-0 text-xl font-extrabold text-[#8a8a8a]">
+              DailyLoadout
+            </Text>
           </Container>
         </Body>
       </Html>

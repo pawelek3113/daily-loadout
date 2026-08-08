@@ -15,6 +15,8 @@
     "login": "Log in",
     "signup": "Sign up",
     "verify": "Verify",
+    "resend": "Resend code",
+    "code_expired": "Code expired",
     "no_account": "Don't have an account? <link>Sign up</link>.",
     "account_exists": "Already have an account? <link>Log in</link>.",
     "errors": {
@@ -41,7 +43,9 @@
       "heading": "Verify",
       "subheading": "your email",
       "text": "Enter this code to verify your account:",
-      "note": "If you didn't request this, you can ignore this email."
+      "info": "Code expires in 5 minutes. Enter it <link>here</link>.",
+      "note": "If you didn't request this, you can ignore this email.",
+      "footer": "sent by"
     }
   }
 }

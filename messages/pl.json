@@ -15,6 +15,8 @@
     "login": "Zaloguj się",
     "signup": "Zarejestruj się",
     "verify": "Zweryfikuj",
+    "resend": "Wyślij kod ponownie",
+    "code_expired": "Kod wygasł",
     "no_account": "Nie masz konta? <link>Zarejestruj się</link>.",
     "account_exists": "Masz już konto? <link>Zaloguj się</link>.",
     "errors": {
@@ -41,7 +43,9 @@
       "heading": "Zweryfikuj",
       "subheading": "swój email",
       "text": "Wpisz ten kod, aby zweryfikować swoje konto:",
-      "note": "Jeśli nie oczekiwałeś tej wiadomości, możesz ją zignorować."
+      "info": "Kod wygaśnie po upływie 5 minut. Wprowadź go <link>tutaj</link>.",
+      "note": "Jeśli nie oczekiwałeś tej wiadomości, możesz ją zignorować.",
+      "footer": "wysłane przez"
     }
   }
 }
