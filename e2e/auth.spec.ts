@@ -1,21 +1,38 @@
-import { expect, test } from "@playwright/test";
+import { BrowserContext, expect, Page, test } from "@playwright/test";
 
-test.describe("Auth", () => {
-  test("user can sign up, OTP input is visible", async ({ page, request }) => {
-    const email = `test-${crypto.randomUUID()}@example.com`;
+test.describe.serial("Auth", () => {
+  const sampleUserName = `sample-user-${Date.now()}`;
+  const sampleUserMail = `${sampleUserName}@example.com`;
+  const url = process.env.APP_DOMAIN ?? "http://localhost:3000/";
 
-    await page.goto("http://localhost:3000/");
-    await page.getByRole("link", { name: "sign up" }).click();
-    await page
+  let ctx: BrowserContext;
+  let reusablePage: Page;
+
+  test.beforeAll(async ({ browser }) => {
+    ctx = await browser.newContext();
+    reusablePage = await ctx.newPage();
+  });
+
+  test.afterAll(async () => {
+    await ctx.close();
+  });
+
+  test("user can sign up", async () => {
+    await reusablePage.goto("http://localhost:3000/sign-up");
+    await reusablePage
       .getByRole("textbox", { name: "AmazingJoe" })
       .fill("Example user");
-    await page.getByRole("textbox", { name: "Name Email" }).fill(email);
-    await page.getByRole("textbox", { name: "Password" }).fill("qwerty123#A");
-    await page.getByRole("button", { name: "Sign up" }).click();
+    await reusablePage
+      .getByRole("textbox", { name: "Name Email" })
+      .fill(sampleUserMail);
+    await reusablePage
+      .getByRole("textbox", { name: "Password" })
+      .fill("qwerty123#A");
+    await reusablePage.getByRole("button", { name: "Sign up" }).click();
 
-    await page.waitForURL("/verify");
+    await reusablePage.waitForURL("/verify");
 
-    const codeInput = page.getByRole("textbox", { name: "Code" });
+    const codeInput = reusablePage.getByRole("textbox", { name: "Code" });
     await expect(codeInput).toBeVisible();
 
     let otp: string | null = null;
@@ -23,8 +40,8 @@ test.describe("Auth", () => {
     await expect
       .poll(
         async () => {
-          const res = await request.get(
-            `/api/test/verification-code?email=${encodeURIComponent(email)}`
+          const res = await ctx.request.get(
+            `/api/test/verification-code?email=${encodeURIComponent(sampleUserMail)}`
           );
           const data = await res.json();
           otp = data.otp;
@@ -41,7 +58,49 @@ test.describe("Auth", () => {
 
     await codeInput.fill(otp);
     await expect(codeInput).toHaveValue(otp);
-    await page.getByRole("button", { name: "Verify" }).click();
-    await expect(page).toHaveURL("/");
+    await reusablePage.getByRole("button", { name: "Verify" }).click();
+    await expect(reusablePage).toHaveURL("/");
+  });
+
+  test("user can change their password", async () => {
+    await ctx.clearCookies();
+
+    await reusablePage.goto(`${url}/sign-in`);
+    await reusablePage.getByRole("link", { name: "Reset it" }).click();
+    await reusablePage.waitForURL("/forgot-password");
+    await reusablePage.getByRole("textbox", { name: "Email" }).click();
+    await reusablePage
+      .getByRole("textbox", { name: "Email" })
+      .fill(sampleUserMail);
+
+    await reusablePage.getByRole("button", { name: "Reset password" }).click();
+
+    let resetUrl: string | null = null;
+
+    await expect
+      .poll(
+        async () => {
+          const res = await ctx.request.get(
+            `/api/test/password-reset?email=${encodeURIComponent(sampleUserMail)}`
+          );
+          const data = await res.json();
+          resetUrl = data.url;
+          return data.url;
+        },
+        {
+          message: "waiting for url to be stored",
+          timeout: 5000,
+        }
+      )
+      .not.toBeNull();
+
+    if (!resetUrl) throw new Error("URL was not retrieved");
+
+    await reusablePage.goto(resetUrl);
+    await reusablePage
+      .getByRole("textbox", { name: "Password" })
+      .fill("qwerty321#A");
+    await reusablePage.getByRole("button", { name: "Reset password" }).click();
+    await expect(reusablePage).toHaveURL("/sign-in?reset=success");
   });
 });
