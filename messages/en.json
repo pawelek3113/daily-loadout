@@ -17,7 +17,9 @@
     "verify": "Verify",
     "resend": "Resend code",
     "code_expired": "Code expired",
+    "reset_password": "Reset password",
     "no_account": "Don't have an account? <link>Sign up</link>.",
+    "forgot_pswd": "Forgot your password? <link>Reset it</link>.",
     "account_exists": "Already have an account? <link>Log in</link>.",
     "errors": {
       "general": "Something went wrong. ({code})",
@@ -45,6 +47,18 @@
       "text": "Enter this code to verify your account:",
       "info": "Code expires in 5 minutes. Enter it <link>here</link>.",
       "note": "If you didn't request this, you can ignore this email.",
+      "footer": "sent by"
+    },
+    "password_reset": {
+      "title": "Password reset",
+      "preview": "Reset your password",
+      "heading": "Reset",
+      "subheading": "your password",
+      "context": "We've received a request to reset the password for your account.",
+      "text": "Click this button to reset your password.",
+      "info": "This link expires in an hour.",
+      "cta": "Reset password",
+      "note": "If you didn't request this, you can safely ignore this email. Your password won't be changed",
       "footer": "sent by"
     }
   }

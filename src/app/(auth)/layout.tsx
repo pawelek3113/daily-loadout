@@ -7,7 +7,6 @@ export default async function AuthLayout({
 }: Readonly<{
   children: ReactNode;
 }>) {
-  // const session = await auth.api.getSession({ headers: await headers() });
   const session = await getServerSession();
   if (session) {
     return redirect("/");

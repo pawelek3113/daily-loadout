@@ -7,10 +7,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import z from "zod";
+import { ParagraphLink } from "../shared/para-with-link";
 import { Button } from "../ui/button";
 
 export const SignInForm = () => {
@@ -28,7 +28,7 @@ export const SignInForm = () => {
   );
 
   type SignInFormData = z.infer<typeof formSchema>;
-  const { control, handleSubmit, setError, formState } =
+  const { control, handleSubmit, setError, formState, getValues } =
     useForm<SignInFormData>({
       resolver: zodResolver(formSchema),
       defaultValues: {
@@ -65,6 +65,14 @@ export const SignInForm = () => {
       );
     }
   };
+
+  // const handleResetPasswordRequest = async () => {
+  //   const email = getValues("email");
+  //   await authClient.requestPasswordReset({
+  //     email,
+  //     redirectTo: "/reset-password",
+  //   });
+  // };
 
   return (
     <>
@@ -103,19 +111,14 @@ export const SignInForm = () => {
             </Field>
           )}
         />
+        <ParagraphLink
+          translationKey="AuthForm.forgot_pswd"
+          href="/forgot-password"
+        />
         <Button type="submit" disabled={formState.isSubmitting}>
           {t("login")}
         </Button>
-        {/* TODO: maybe put that on page instead here */}
-        <p className="text-muted-foreground text-xs font-medium">
-          {t.rich("no_account", {
-            link: (chunks) => (
-              <Link href="/sign-up" className="text-hyperlink">
-                {chunks}
-              </Link>
-            ),
-          })}
-        </p>
+        <ParagraphLink translationKey="AuthForm.no_account" href="/sign-up" />
       </form>
     </>
   );

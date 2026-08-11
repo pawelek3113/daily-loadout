@@ -17,7 +17,9 @@
     "verify": "Zweryfikuj",
     "resend": "Wyślij kod ponownie",
     "code_expired": "Kod wygasł",
+    "reset_password": "Resetuj hasło",
     "no_account": "Nie masz konta? <link>Zarejestruj się</link>.",
+    "forgot_pswd": "Zapomniałeś hasła? <link>Zresetuj je</link>.",
     "account_exists": "Masz już konto? <link>Zaloguj się</link>.",
     "errors": {
       "general": "Coś poszło nie tak. ({code})",
@@ -45,6 +47,18 @@
       "text": "Wpisz ten kod, aby zweryfikować swoje konto:",
       "info": "Kod wygaśnie po upływie 5 minut. Wprowadź go <link>tutaj</link>.",
       "note": "Jeśli nie oczekiwałeś tej wiadomości, możesz ją zignorować.",
+      "footer": "wysłane przez"
+    },
+    "password_reset": {
+      "title": "Reset hasła",
+      "preview": "Zresetuj swoje hasło",
+      "heading": "Zresetuj",
+      "subheading": "swoje hasło",
+      "context": "Otrzymaliśmy żądanie zmiany hasła przypisanego do Twojego konta.",
+      "text": "Naciśnij ten przycisk, aby zresetować swoje hasło.",
+      "info": "Ten link wygasa za godzinę.",
+      "cta": "Resetuj hasło",
+      "note": "Jeśli nie oczekiwałeś tej wiadomości, możesz bezpiecznie ją zignorować. Twoje hasło nie zostanie zmienione",
       "footer": "wysłane przez"
     }
   }

@@ -15,6 +15,24 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: async ({ user, url, token }) => {
+      const locale = (await getLocale()) as Locale;
+      const t = await getTranslations();
+      const title = t("emails.password_reset.title");
+
+      const mailer = await getMailer();
+
+      waitUntil(
+        mailer.sendResetPasswordMail({
+          email: user.email,
+          title,
+          locale,
+          token,
+          url,
+        })
+      );
+    },
   },
   plugins: [
     emailOTP({

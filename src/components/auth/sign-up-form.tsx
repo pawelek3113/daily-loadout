@@ -7,12 +7,12 @@ import { authClient } from "@/lib/auth-client";
 import { setOtpExpiry } from "@/lib/otp-timer";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import z from "zod";
+import { ParagraphLink } from "../shared/para-with-link";
 
 export const SignUpForm = () => {
   const t = useTranslations("AuthForm");
@@ -99,7 +99,6 @@ export const SignUpForm = () => {
                 id="name"
                 aria-invalid={fieldState.invalid}
                 placeholder="AmazingJoe"
-
                 autoComplete="off"
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -118,6 +117,7 @@ export const SignUpForm = () => {
                 aria-invalid={fieldState.invalid}
                 placeholder="joe@acme.com"
                 autoComplete="off"
+                type="email"
               />
               {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
             </Field>
@@ -141,16 +141,10 @@ export const SignUpForm = () => {
           )}
         />
         <Button type="submit">{t("signup")}</Button>
-        {/* TODO: maybe put that on page instead here */}
-        <p className="text-muted-foreground text-xs font-medium">
-          {t.rich("account_exists", {
-            link: (chunks) => (
-              <Link href="/sign-in" className="text-hyperlink">
-                {chunks}
-              </Link>
-            ),
-          })}
-        </p>
+        <ParagraphLink
+          translationKey="AuthForm.account_exists"
+          href="/sign-in"
+        />
       </form>
     </>
   );

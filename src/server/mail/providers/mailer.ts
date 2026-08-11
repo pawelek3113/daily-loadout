@@ -1,8 +1,9 @@
-import { sendVerificationOTPMail } from "../mails";
+import type { sendResetPasswordMail, sendVerificationOTPMail } from "../mails";
 import { testMailer } from "./testMailer";
 
 export interface Mailer {
   sendVerificationOTPMail: typeof sendVerificationOTPMail;
+  sendResetPasswordMail: typeof sendResetPasswordMail;
 }
 
 export const getMailer = async (): Promise<Mailer> => {

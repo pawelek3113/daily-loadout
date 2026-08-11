@@ -1,7 +1,8 @@
 import "server-only";
+import { sendResetPasswordMail, sendVerificationOTPMail } from "../mails";
 import type { Mailer } from "./mailer";
-import { sendVerificationOTPMail } from "../mails";
 
 export const resendMailer: Mailer = {
   sendVerificationOTPMail,
+  sendResetPasswordMail,
 };
