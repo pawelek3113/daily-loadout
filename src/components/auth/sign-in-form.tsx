@@ -28,7 +28,7 @@ export const SignInForm = () => {
   );
 
   type SignInFormData = z.infer<typeof formSchema>;
-  const { control, handleSubmit, setError, formState, getValues } =
+  const { control, handleSubmit, setError, formState } =
     useForm<SignInFormData>({
       resolver: zodResolver(formSchema),
       defaultValues: {
@@ -65,14 +65,6 @@ export const SignInForm = () => {
       );
     }
   };
-
-  // const handleResetPasswordRequest = async () => {
-  //   const email = getValues("email");
-  //   await authClient.requestPasswordReset({
-  //     email,
-  //     redirectTo: "/reset-password",
-  //   });
-  // };
 
   return (
     <>

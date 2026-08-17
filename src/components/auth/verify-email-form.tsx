@@ -58,7 +58,7 @@ export const VerifyEmailForm = ({ email, code }: VerifyEmailFormProps) => {
     });
 
     if (data?.status) {
-      toast("success");
+      // toast("success");
       router.push("/");
     }
     if (error?.code) {
