@@ -37,8 +37,6 @@ export const ForgotPasswordForm = () => {
       redirectTo: "/reset-password",
     });
 
-    // TODO: toast or something
-
     if (error?.code) {
       setError(
         "email",
@@ -52,29 +50,40 @@ export const ForgotPasswordForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="email"
-          control={control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="email">{t("email")}</FieldLabel>
-              <Input
-                {...field}
-                id="email"
-                type="email"
-                aria-invalid={fieldState.invalid}
-                placeholder="joe@acme.com"
-                autoComplete="off"
-              />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
-          )}
-        />
-        <Button type="submit" disabled={formState.isSubmitting}>
-          {t("reset_password")}
-        </Button>
-      </form>
+      {formState.isSubmitted ? (
+        <div className="flex flex-col gap-2.5">
+          <h1 className="text-5xl font-semibold tracking-tighter">
+            {t("forgot_password.heading")}
+          </h1>
+          <h2 className="text-2xl">{t("forgot_password.subheading")}</h2>
+        </div>
+      ) : (
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor="email">{t("email")}</FieldLabel>
+                <Input
+                  {...field}
+                  id="email"
+                  type="email"
+                  aria-invalid={fieldState.invalid}
+                  placeholder="joe@acme.com"
+                  autoComplete="off"
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+          <Button type="submit" disabled={formState.isSubmitting}>
+            {t("reset_password")}
+          </Button>
+        </form>
+      )}
     </>
   );
 };

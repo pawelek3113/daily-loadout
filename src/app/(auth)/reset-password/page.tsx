@@ -14,8 +14,7 @@ const ResetPasswordPage = async (props: ResetPasswordPageProps) => {
   const { token = null } = await props.searchParams;
 
   if (!token) {
-    // TODO: toast, token not provided etc
-    redirect("/");
+    redirect("/?error=password-token-not-provided");
   }
 
   return <ResetPasswordForm token={token} />;

@@ -20,6 +20,16 @@
     "reset_password": "Reset password",
     "no_account": "Don't have an account? <link>Sign up</link>.",
     "forgot_pswd": "Forgot your password? <link>Reset it</link>.",
+    "code_verification": {
+      "success": {
+        "title": "Successfully verified account!",
+        "description": "You're all set to use your account!"
+      }
+    },
+    "forgot_password": {
+      "heading": "Email sent!",
+      "subheading": "We've sent a message containing further steps to reset your password."
+    },
     "account_exists": "Already have an account? <link>Log in</link>.",
     "errors": {
       "general": "Something went wrong. ({code})",
@@ -35,7 +45,21 @@
         "max": "Too long, please provide a shorter name",
         "nonempty": "Name must not be empty, please type in your name"
       },
-      "otp": "Incorrect token"
+      "otp": "Incorrect token",
+      "reset_password": {
+        "token_not_provided": {
+          "title": "Token not provided!",
+          "description": "Check your email and visit the correct page."
+        }
+      }
+    },
+    "toasts": {
+      "signin": {
+        "success": {
+          "title": "Success!",
+          "description": "You have successfully logged in."
+        }
+      }
     }
   },
   "emails": {

@@ -20,6 +20,16 @@
     "reset_password": "Resetuj hasło",
     "no_account": "Nie masz konta? <link>Zarejestruj się</link>.",
     "forgot_pswd": "Zapomniałeś hasła? <link>Zresetuj je</link>.",
+    "code_verification": {
+      "success": {
+        "title": "Pomyślnie zweryfikowano konto!",
+        "description": "Wszystko gotowe! Możesz zacząć korzystać z konta."
+      }
+    },
+    "forgot_password": {
+      "heading": "Email wysłany!",
+      "subheading": "Wysłaliśmy wiadomość zawierającą dalsze kroki w celu ponownego ustawienia hasła."
+    },
     "account_exists": "Masz już konto? <link>Zaloguj się</link>.",
     "errors": {
       "general": "Coś poszło nie tak. ({code})",
@@ -35,7 +45,21 @@
         "max": "Za długa, proszę podaj krótszą nazwę",
         "nonempty": "Nazwa nie może być pusta, proszę wprowadź swoją nazwę"
       },
-      "otp": "Niepoprawny kod"
+      "otp": "Niepoprawny kod",
+      "reset_password": {
+        "token_not_provided": {
+          "title": "Nie podano tokenu!",
+          "description": "Sprawdź swoją skrzynkę mailową i odwiedź poprawną stronę."
+        }
+      }
+    },
+    "toasts": {
+      "signin": {
+        "success": {
+          "title": "Sukces!",
+          "description": "Udało się pomyślnie zalogować."
+        }
+      }
     }
   },
   "emails": {

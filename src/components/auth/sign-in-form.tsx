@@ -6,6 +6,8 @@ import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
+import { TOAST_TYPES } from "@/lib/toast-variants";
+import { showToast } from "@/lib/toasts";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
@@ -44,6 +46,11 @@ export const SignInForm = () => {
     const { data, error } = await authClient.signIn.email({ email, password });
 
     if (data?.user) {
+      showToast({
+        title: t("toasts.signin.success.title"),
+        description: t("toasts.signin.success.description"),
+        type: TOAST_TYPES.success,
+      });
       router.push("/");
     }
 

@@ -5,11 +5,12 @@ import { authClient } from "@/lib/auth-client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
+import { TOAST_TYPES } from "@/lib/toast-variants";
+import { showToast } from "@/lib/toasts";
 import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
-import toast from "react-hot-toast";
 import z from "zod";
 import { useOtpCountdown } from "../hooks/use-otp-countdown";
 import { Button } from "../ui/button";
@@ -58,7 +59,11 @@ export const VerifyEmailForm = ({ email, code }: VerifyEmailFormProps) => {
     });
 
     if (data?.status) {
-      // toast("success");
+      showToast({
+        title: t("code_verification.success.title"),
+        description: t("code_verification.success.description"),
+        type: TOAST_TYPES.success,
+      });
       router.push("/");
     }
     if (error?.code) {

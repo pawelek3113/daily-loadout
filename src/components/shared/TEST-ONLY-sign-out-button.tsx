@@ -1,5 +1,6 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
+import { showToast } from "@/lib/toasts";
 import { Button } from "../ui/button";
 
 export const SignOutButton = () => {
@@ -8,7 +9,7 @@ export const SignOutButton = () => {
       onClick={async () => {
         const d = await authClient.signOut();
         if (d.data?.success) {
-          // toast("signed out!");
+          showToast({ title: "Signed out" });
         }
       }}
     >
