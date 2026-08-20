@@ -17,7 +17,7 @@ import { useEffect } from "react";
  * @see
  * Use {@link showToast} to show toast on the client.
  */
-export function ToastListener() {
+export function ServerToastListener() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
