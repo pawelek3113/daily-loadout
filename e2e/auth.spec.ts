@@ -3,6 +3,8 @@ import { BrowserContext, expect, Page, test } from "@playwright/test";
 test.describe.serial("Auth", () => {
   const sampleUserName = `sample-user-${Date.now()}`;
   const sampleUserMail = `${sampleUserName}@example.com`;
+  const oldPass = "qwerty123#a";
+  const newPass = "qwerty123#B";
   const url = process.env.APP_DOMAIN ?? "http://localhost:3000/";
 
   let ctx: BrowserContext;
@@ -25,9 +27,7 @@ test.describe.serial("Auth", () => {
     await reusablePage
       .getByRole("textbox", { name: "Name Email" })
       .fill(sampleUserMail);
-    await reusablePage
-      .getByRole("textbox", { name: "Password" })
-      .fill("qwerty123#A");
+    await reusablePage.getByRole("textbox", { name: "Password" }).fill(oldPass);
     await reusablePage.getByRole("button", { name: "Sign up" }).click();
 
     await reusablePage.waitForURL("/verify");
@@ -97,10 +97,27 @@ test.describe.serial("Auth", () => {
     if (!resetUrl) throw new Error("URL was not retrieved");
 
     await reusablePage.goto(resetUrl);
-    await reusablePage
-      .getByRole("textbox", { name: "Password" })
-      .fill("qwerty321#A");
+    await reusablePage.getByRole("textbox", { name: "Password" }).fill(newPass);
     await reusablePage.getByRole("button", { name: "Reset password" }).click();
-    await expect(reusablePage).toHaveURL("/sign-in?reset=success");
+    await expect(
+      reusablePage.getByRole("dialog", { name: "Success!" })
+    ).toBeInViewport();
+  });
+
+  test("user can sign in after resetting their password", async () => {
+    await reusablePage.getByRole("textbox", { name: "Email" }).click();
+    await reusablePage
+      .getByRole("textbox", { name: "Email" })
+      .fill(sampleUserMail);
+
+    await reusablePage.getByRole("textbox", { name: "Password" }).fill(newPass);
+    await reusablePage.getByRole("button", { name: "Log in" }).click();
+    await reusablePage.waitForURL("/");
+    await expect(
+      reusablePage.getByRole("dialog", {
+        name: "Success!",
+        description: "You have successfully logged in.",
+      })
+    ).toBeInViewport();
   });
 });
