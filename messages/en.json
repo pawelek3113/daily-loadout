@@ -59,6 +59,16 @@
           "title": "Success!",
           "description": "You have successfully logged in."
         }
+      },
+      "reset_password": {
+        "success": {
+          "title": "Success!",
+          "description": "Your account's password has been reset, now log in."
+        },
+        "error": {
+          "title": "Invalid reset password token",
+          "description": "Try requesting a password reset again and visit a correct site."
+        }
       }
     }
   },

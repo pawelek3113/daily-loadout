@@ -59,6 +59,16 @@
           "title": "Sukces!",
           "description": "Udało się pomyślnie zalogować."
         }
+      },
+      "reset_password": {
+        "success": {
+          "title": "Sukces!",
+          "description": "Udało się zresetować hasło do Twojego konta, teraz zaloguj się."
+        },
+        "error": {
+          "title": "Nieprawidłowy token resetu hasła",
+          "description": "Spróbuj zresetować swoje hasło jeszcze raz i odwiedzić właściwą stronę."
+        }
       }
     }
   },

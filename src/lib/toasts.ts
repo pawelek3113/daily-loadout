@@ -18,5 +18,18 @@ export const showToast = ({
 }: ShowToastProps) => {
   const toastType: ToastType = isToastType(type) ? type : "default";
 
-  toast.add({ title, description, type: toastType, ...opts });
+  toast.add({
+    title,
+    description,
+    type: toastType,
+    timeout: TOAST_DURATION.DEFAULT,
+    ...opts,
+  });
 };
+
+export const TOAST_DURATION = {
+  INFINITE: 0,
+  LONG: 7500,
+  DEFAULT: 5000,
+  SHORT: 3500,
+} as const;

@@ -6,6 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
 import { authClient } from "@/lib/auth-client";
+import { TOAST_TYPES } from "@/lib/toast-variants";
+import { showToast, TOAST_DURATION } from "@/lib/toasts";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
@@ -47,6 +49,17 @@ export const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
       token,
     });
 
+    if (error?.code === "INVALID_TOKEN") {
+      showToast({
+        title: t("toasts.reset_password.error.title"),
+        description: t("toasts.reset_password.error.description"),
+        type: TOAST_TYPES.error,
+        opts: {
+          timeout: TOAST_DURATION.LONG,
+        },
+      });
+      router.replace("/");
+    }
     if (error) {
       setError(
         "password",
@@ -56,8 +69,12 @@ export const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
         { shouldFocus: true }
       );
     } else {
-      // TODO: handle that on the sign in page
-      router.push("/sign-in?reset=success");
+      showToast({
+        title: t("toasts.reset_password.success.title"),
+        description: t("toasts.reset_password.success.description"),
+        type: TOAST_TYPES.success,
+      });
+      router.push("/sign-in");
     }
   };
 
