@@ -8,6 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 
 import { TOAST_TYPES } from "@/lib/toast-variants";
 import { showToast } from "@/lib/toasts";
+import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
@@ -15,7 +16,11 @@ import z from "zod";
 import { ParagraphLink } from "../shared/para-with-link";
 import { Button } from "../ui/button";
 
-export const SignInForm = () => {
+type SignInFormProps = {
+  className?: HTMLDivElement["className"];
+};
+
+export const SignInForm = ({ className }: SignInFormProps) => {
   const t = useTranslations("AuthForm");
   const formSchema = useMemo(
     () =>
@@ -74,25 +79,31 @@ export const SignInForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="email"
-          control={control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="email">{t("email")}</FieldLabel>
-              <Input
-                {...field}
-                id="email"
-                aria-invalid={fieldState.invalid}
-                placeholder="joe@acme.com"
-                autoComplete="off"
-              />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
-          )}
-        />
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn(
+        "glass flex w-full flex-col items-center gap-3 rounded-4xl p-4 md:justify-center md:p-2.5",
+        className
+      )}
+    >
+      <Controller
+        name="email"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="email">{t("email")}</FieldLabel>
+            <Input
+              {...field}
+              id="email"
+              aria-invalid={fieldState.invalid}
+              placeholder="joe@acme.com"
+              autoComplete="off"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <div className="flex w-full flex-col gap-1">
         <Controller
           name="password"
           control={control}
@@ -114,11 +125,11 @@ export const SignInForm = () => {
           translationKey="AuthForm.forgot_pswd"
           href="/forgot-password"
         />
-        <Button type="submit" disabled={formState.isSubmitting}>
-          {t("login")}
-        </Button>
-        <ParagraphLink translationKey="AuthForm.no_account" href="/sign-up" />
-      </form>
-    </>
+      </div>
+      <Button type="submit" disabled={formState.isSubmitting} size="lg">
+        {t("login")}
+      </Button>
+      <ParagraphLink translationKey="AuthForm.no_account" href="/sign-up" />
+    </form>
   );
 };

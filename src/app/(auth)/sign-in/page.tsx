@@ -1,4 +1,4 @@
-import { SignInForm } from "@/components/auth/sign-in-form";
+import { SignInPageComponent } from "@/components/auth/sign-in-page";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,7 +6,7 @@ export const metadata: Metadata = {
 };
 
 const SignInPage = () => {
-  return <SignInForm />;
+  return <SignInPageComponent />;
 };
 
 export default SignInPage;

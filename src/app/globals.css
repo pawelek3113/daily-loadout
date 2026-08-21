@@ -177,3 +177,12 @@
     @apply font-inter;
   }
 }
+
+@layer utilities {
+  .glass {
+    @apply border-4 border-white/20 bg-white/10 backdrop-blur-md dark:border-black/20 dark:bg-black/10;
+  }
+  .dark-glass {
+    @apply border-4 border-black/20 bg-black/10 backdrop-blur-md;
+  }
+}
