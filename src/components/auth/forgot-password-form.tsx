@@ -80,7 +80,7 @@ export const ForgotPasswordForm = ({ className }: ForgotPasswordFormProps) => {
                   type="email"
                   aria-invalid={fieldState.invalid}
                   placeholder="joe@acme.com"
-                  autoComplete="off"
+                  autoComplete="email"
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />

@@ -15,6 +15,7 @@ import { useMemo } from "react";
 import z from "zod";
 import { Button } from "../ui/button";
 import { FORM_CLASSNAME } from "./auth-page";
+import { PasswordInput } from "../ui/input-password";
 
 type ResetPasswordFormProps = {
   token: string;
@@ -95,11 +96,11 @@ export const ResetPasswordForm = ({
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
             <FieldLabel htmlFor="password">{t("password")}</FieldLabel>
-            <Input
+            <PasswordInput
               {...field}
               id="password"
-              type="password"
               aria-invalid={fieldState.invalid}
+              autoComplete="new-password"
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>

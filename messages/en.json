@@ -18,6 +18,8 @@
     "resend": "Resend code",
     "code_expired": "Code expired",
     "reset_password": "Reset password",
+    "hide_password": "Hide password",
+    "show_password": "Show password",
     "no_account": "Don't have an account? <link>Sign up</link>.",
     "forgot_pswd": "Forgot your password? <link>Reset it</link>.",
     "code_verification": {

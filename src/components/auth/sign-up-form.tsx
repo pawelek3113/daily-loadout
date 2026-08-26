@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import z from "zod";
 import { ParagraphLink } from "../shared/para-with-link";
 import { FORM_CLASSNAME } from "./auth-page";
+import { PasswordInput } from "../ui/input-password";
 
 type SignUpFormProps = {
   className?: HTMLFormElement["className"];
@@ -107,7 +108,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
               id="name"
               aria-invalid={fieldState.invalid}
               placeholder="AmazingJoe"
-              autoComplete="off"
+              autoComplete="name"
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
@@ -124,7 +125,7 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
               id="email"
               aria-invalid={fieldState.invalid}
               placeholder="joe@acme.com"
-              autoComplete="off"
+              autoComplete="email"
               type="email"
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
@@ -137,12 +138,11 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
             <FieldLabel htmlFor="password">{t("password")}</FieldLabel>
-            <Input
+            <PasswordInput
               {...field}
               id="password"
-              type="password"
               aria-invalid={fieldState.invalid}
-              autoComplete="off"
+              autoComplete="new-password"
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>

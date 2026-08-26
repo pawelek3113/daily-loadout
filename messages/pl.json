@@ -18,6 +18,8 @@
     "resend": "Wyślij kod ponownie",
     "code_expired": "Kod wygasł",
     "reset_password": "Resetuj hasło",
+    "hide_password": "Schowaj hasło",
+    "show_password": "Pokaż hasło",
     "no_account": "Nie masz konta? <link>Zarejestruj się</link>.",
     "forgot_pswd": "Zapomniałeś hasła? <link>Zresetuj je</link>.",
     "code_verification": {

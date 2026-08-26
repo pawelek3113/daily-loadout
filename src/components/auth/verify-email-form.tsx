@@ -96,7 +96,12 @@ export const VerifyEmailForm = ({ email, code }: VerifyEmailFormProps) => {
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
               <FieldLabel htmlFor="otp">{t("otp")}</FieldLabel>
-              <InputOTP {...field} id="otp" maxLength={6}>
+              <InputOTP
+                {...field}
+                id="otp"
+                maxLength={6}
+                autoComplete="one-time-code"
+              >
                 <InputOTPGroup>
                   <InputOTPSlot index={0} />
                   <InputOTPSlot index={1} />
