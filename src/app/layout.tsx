@@ -1,8 +1,9 @@
 import { Providers } from "@/components/providers/providers";
+import { ThemeProvider } from "@wrksz/themes/next";
 import type { Metadata } from "next";
+import { getLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@wrksz/themes/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,14 +15,16 @@ export const metadata: Metadata = {
   description: "dailyloadout app",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="en"
+      lang={locale}
       className={`${inter.variable} h-full antialiased`}
       suppressHydrationWarning
     >

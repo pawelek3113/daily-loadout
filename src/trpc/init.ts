@@ -1,4 +1,6 @@
-import { initTRPC } from "@trpc/server";
+import { auth } from "@/server/auth/auth";
+import { db } from "@/server/db";
+import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 
 /**
@@ -7,9 +9,14 @@ import superjson from "superjson";
  * API route handler (where you pass the request headers).
  */
 export const createTRPCContext = async (opts: { headers: Headers }) => {
-  // const user = await auth(opts.headers);
+  const session = await auth.api.getSession({ headers: opts.headers });
 
-  return { userId: "user_123", headers: opts.headers };
+  return {
+    session: session?.session ?? null,
+    user: session?.user ?? null,
+    headers: opts.headers,
+    db,
+  };
 };
 
 const t = initTRPC
@@ -17,7 +24,23 @@ const t = initTRPC
   .create({
     transformer: superjson,
   });
-// Base router and procedure helpers
+
 export const createTRPCRouter = t.router;
 export const createCallerFactory = t.createCallerFactory;
 export const baseProcedure = t.procedure;
+
+export const protectedProcdure = t.procedure.use(async (opts) => {
+  const { ctx, next } = opts;
+
+  if (!ctx.session || !ctx.user) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
+  }
+
+  return next({
+    ctx: {
+      ...ctx,
+      session: ctx.session,
+      user: ctx.user,
+    },
+  });
+});

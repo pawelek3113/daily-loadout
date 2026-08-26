@@ -6,5 +6,96 @@
   "HomePage": {
     "title": "Hello {value}!",
     "loading": "Loading"
+  },
+  "AuthForm": {
+    "email": "Email",
+    "password": "Password",
+    "name": "Name",
+    "otp": "Code",
+    "login": "Log in",
+    "signup": "Sign up",
+    "verify": "Verify",
+    "resend": "Resend code",
+    "code_expired": "Code expired",
+    "reset_password": "Reset password",
+    "hide_password": "Hide password",
+    "show_password": "Show password",
+    "no_account": "Don't have an account? <link>Sign up</link>.",
+    "forgot_pswd": "Forgot your password? <link>Reset it</link>.",
+    "code_verification": {
+      "success": {
+        "title": "Successfully verified account!",
+        "description": "You're all set to use your account!"
+      }
+    },
+    "forgot_password": {
+      "heading": "Email sent!",
+      "subheading": "We've sent a message containing further steps to reset your password."
+    },
+    "account_exists": "Already have an account? <link>Log in</link>.",
+    "errors": {
+      "general": "Something went wrong. ({code})",
+      "invalid_email_or_pswd": "Incorrect email or password",
+      "email": "Invalid email address",
+      "account_exists": "Account with that email already exists, try logging in instead.",
+      "password": {
+        "nonempty": "Password must not be empty, please type in your password",
+        "min": "Too short, please provide a longer password"
+      },
+      "name": {
+        "min": "Too short, please provide a longer name",
+        "max": "Too long, please provide a shorter name",
+        "nonempty": "Name must not be empty, please type in your name"
+      },
+      "otp": "Incorrect token",
+      "reset_password": {
+        "token_not_provided": {
+          "title": "Token not provided!",
+          "description": "Check your email and visit the correct page."
+        }
+      }
+    },
+    "toasts": {
+      "signin": {
+        "success": {
+          "title": "Success!",
+          "description": "You have successfully logged in."
+        }
+      },
+      "reset_password": {
+        "success": {
+          "title": "Success!",
+          "description": "Your account's password has been reset, now log in."
+        },
+        "error": {
+          "title": "Invalid reset password token",
+          "description": "Try requesting a password reset again and visit a correct site."
+        }
+      }
+    }
+  },
+  "emails": {
+    "email_verification": {
+      "title": "Account verification",
+      "preview": "Your verification code is {otp}",
+      "heading": "Verify",
+      "subheading": "your email",
+      "text": "Enter this code to verify your account:",
+      "info": "Code expires in 5 minutes. Enter it <link>here</link>.",
+      "note": "If you didn't request this, you can ignore this email.",
+      "footer": "sent by"
+    },
+    "password_reset": {
+      "title": "Password reset",
+      "preview": "Reset your password",
+      "heading": "Reset",
+      "subheading": "your password",
+      "context": "We've received a request to reset the password for your account.",
+      "text": "Click this button to reset your password.",
+      "info": "This link expires in an hour.",
+      "cta": "Reset password",
+      "note": "If you didn't request this, you can safely ignore this email. Your password won't be changed",
+      "footer": "sent by"
+    }
   }
 }

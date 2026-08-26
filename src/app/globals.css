@@ -27,7 +27,23 @@
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
+  --color-chocolate: #271612;
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+  --color-success-muted-2: var(--success-muted-2);
+  --color-success-subtle: var(--success-subtle);
   --color-destructive: var(--destructive);
+  --color-destructive-muted: var(--destructive-muted);
+  --color-destructive-muted-2: var(--destructive-muted-2);
+  --color-destructive-subtle: var(--destructive-subtle);
+  --color-info: var(--info);
+  --color-info-muted: var(--info-muted);
+  --color-info-muted-2: var(--info-muted-2);
+  --color-info-subtle: var(--info-subtle);
+  --color-warning: var(--warning);
+  --color-warning-muted: var(--warning-muted);
+  --color-warning-muted-2: var(--warning-muted-2);
+  --color-warning-subtle: var(--warning-subtle);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -40,6 +56,7 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-hyperlink: var(--hyperlink);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -64,7 +81,22 @@
   --muted-foreground: oklch(0.553 0.013 58.071);
   --accent: oklch(0.97 0.001 106.424);
   --accent-foreground: oklch(0.216 0.006 56.043);
-  --destructive: oklch(0.577 0.245 27.325);
+  --success: oklch(55% 0.16 145);
+  --success-muted: oklch(95% 0.035 145);
+  --success-muted-2: oklch(83% 0.1 145);
+  --success-subtle: oklch(42% 0.13 145);
+  --destructive: oklch(58% 0.2 27);
+  --destructive-muted: oklch(95% 0.035 27);
+  --destructive-muted-2: oklch(83% 0.1 27);
+  --destructive-subtle: oklch(45% 0.15 27);
+  --info: oklch(55% 0.18 250);
+  --info-muted: oklch(95% 0.035 250);
+  --info-muted-2: oklch(83% 0.1 250);
+  --info-subtle: oklch(42% 0.15 250);
+  --warning: oklch(55% 0.15 70);
+  --warning-muted: oklch(95% 0.045 85);
+  --warning-muted-2: oklch(83% 0.12 80);
+  --warning-subtle: oklch(42% 0.13 70);
   --border: oklch(0.923 0.003 48.717);
   --input: oklch(0.923 0.003 48.717);
   --ring: oklch(0.709 0.01 56.259);
@@ -82,6 +114,7 @@
   --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
   --sidebar-border: oklch(0.923 0.003 48.717);
   --sidebar-ring: oklch(0.709 0.01 56.259);
+  --hyperlink: oklch(0.4588 0.2326 299.65);
 }
 
 .dark {
@@ -91,7 +124,7 @@
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
   --popover-foreground: oklch(0.985 0.001 106.423);
-  --primary: oklch(0.473 0.137 46.201);
+  --primary: rgb(151, 60, 0);
   --primary-foreground: oklch(0.987 0.022 95.277);
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
@@ -99,7 +132,22 @@
   --muted-foreground: oklch(0.709 0.01 56.259);
   --accent: oklch(0.268 0.007 34.298);
   --accent-foreground: oklch(0.985 0.001 106.423);
-  --destructive: oklch(0.704 0.191 22.216);
+  --success: oklch(78% 0.17 150);
+  --success-muted: oklch(27% 0.07 150);
+  --success-muted-2: oklch(45% 0.1 150);
+  --success-subtle: oklch(70% 0.12 150);
+  --destructive: oklch(78% 0.18 22);
+  --destructive-muted: oklch(27% 0.08 22);
+  --destructive-muted-2: oklch(45% 0.1 22);
+  --destructive-subtle: oklch(68% 0.12 22);
+  --info: oklch(78% 0.14 245);
+  --info-muted: oklch(27% 0.08 245);
+  --info-muted-2: oklch(45% 0.11 245);
+  --info-subtle: oklch(70% 0.12 245);
+  --warning: oklch(80% 0.16 80);
+  --warning-muted: oklch(28% 0.07 80);
+  --warning-muted-2: oklch(48% 0.11 80);
+  --warning-subtle: oklch(72% 0.13 80);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.553 0.013 58.071);
@@ -116,6 +164,7 @@
   --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.553 0.013 58.071);
+  --hyperlink: oklch(0.4588 0.1529 299.65);
 }
 
 @layer base {
@@ -127,5 +176,11 @@
   }
   html {
     @apply font-inter;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply border-4 border-white/20 bg-white/10 backdrop-blur-md dark:border-black/20 dark:bg-black/10;
   }
 }
