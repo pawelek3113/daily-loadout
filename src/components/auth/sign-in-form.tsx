@@ -15,9 +15,10 @@ import { useMemo } from "react";
 import z from "zod";
 import { ParagraphLink } from "../shared/para-with-link";
 import { Button } from "../ui/button";
+import { FORM_CLASSNAME } from "./auth-page";
 
 type SignInFormProps = {
-  className?: HTMLDivElement["className"];
+  className?: HTMLFormElement["className"];
 };
 
 export const SignInForm = ({ className }: SignInFormProps) => {
@@ -81,10 +82,7 @@ export const SignInForm = ({ className }: SignInFormProps) => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={cn(
-        "glass flex w-full flex-col items-center gap-3 rounded-4xl p-4 md:justify-center md:p-2.5",
-        className
-      )}
+      className={cn(FORM_CLASSNAME, className)}
     >
       <Controller
         name="email"

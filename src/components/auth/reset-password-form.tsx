@@ -8,17 +8,23 @@ import { Controller, useForm } from "react-hook-form";
 import { authClient } from "@/lib/auth-client";
 import { TOAST_TYPES } from "@/lib/toast-variants";
 import { showToast, TOAST_DURATION } from "@/lib/toasts";
+import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import z from "zod";
 import { Button } from "../ui/button";
+import { FORM_CLASSNAME } from "./auth-page";
 
 type ResetPasswordFormProps = {
   token: string;
+  className?: HTMLFormElement["className"];
 };
 
-export const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
+export const ResetPasswordForm = ({
+  token,
+  className,
+}: ResetPasswordFormProps) => {
   const t = useTranslations("AuthForm");
   const formSchema = useMemo(
     () =>
@@ -79,28 +85,29 @@ export const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="password"
-          control={control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="password">{t("password")}</FieldLabel>
-              <Input
-                {...field}
-                id="password"
-                type="password"
-                aria-invalid={fieldState.invalid}
-              />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
-          )}
-        />
-        <Button type="submit" disabled={formState.isSubmitting}>
-          {t("reset_password")}
-        </Button>
-      </form>
-    </>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn(FORM_CLASSNAME, className)}
+    >
+      <Controller
+        name="password"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="password">{t("password")}</FieldLabel>
+            <Input
+              {...field}
+              id="password"
+              type="password"
+              aria-invalid={fieldState.invalid}
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Button type="submit" disabled={formState.isSubmitting}>
+        {t("reset_password")}
+      </Button>
+    </form>
   );
 };

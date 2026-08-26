@@ -6,12 +6,18 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 
 import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 import { useTranslations } from "next-intl";
 import { useMemo } from "react";
 import z from "zod";
 import { Button } from "../ui/button";
+import { FORM_CLASSNAME } from "./auth-page";
 
-export const ForgotPasswordForm = () => {
+type ForgotPasswordFormProps = {
+  className?: HTMLFormElement["className"];
+};
+
+export const ForgotPasswordForm = ({ className }: ForgotPasswordFormProps) => {
   const t = useTranslations("AuthForm");
   const formSchema = useMemo(
     () =>
@@ -58,7 +64,10 @@ export const ForgotPasswordForm = () => {
           <h2 className="text-2xl">{t("forgot_password.subheading")}</h2>
         </div>
       ) : (
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className={cn(FORM_CLASSNAME, className)}
+        >
           <Controller
             name="email"
             control={control}

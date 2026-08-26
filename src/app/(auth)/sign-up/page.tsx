@@ -1,3 +1,4 @@
+import { AuthPageComponent } from "@/components/auth/auth-page";
 import { SignUpForm } from "@/components/auth/sign-up-form";
 import { Metadata } from "next";
 
@@ -6,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const SignUpPage = () => {
-  return <SignUpForm />;
+  return <AuthPageComponent form={<SignUpForm />} />;
 };
 
 export default SignUpPage;

@@ -1,3 +1,4 @@
+import { AuthPageComponent } from "@/components/auth/auth-page";
 import { ForgotPasswordForm } from "@/components/auth/forgot-password-form";
 import { Metadata } from "next";
 
@@ -6,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const ForgotPasswordPage = () => {
-  return <ForgotPasswordForm />;
+  return <AuthPageComponent form={<ForgotPasswordForm />} />;
 };
 
 export default ForgotPasswordPage;

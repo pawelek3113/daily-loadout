@@ -1,3 +1,4 @@
+import { AuthPageComponent } from "@/components/auth/auth-page";
 import { ResetPasswordForm } from "@/components/auth/reset-password-form";
 import { buildToastRedirectUrl } from "@/lib/toast-messages";
 import { TOAST_TYPES } from "@/lib/toast-variants";
@@ -25,7 +26,7 @@ const ResetPasswordPage = async (props: ResetPasswordPageProps) => {
     );
   }
 
-  return <ResetPasswordForm token={token} />;
+  return <AuthPageComponent form={<ResetPasswordForm token={token} />} />;
 };
 
 export default ResetPasswordPage;

@@ -11,10 +11,16 @@ import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { Controller, useForm } from "react-hook-form";
 
+import { cn } from "@/lib/utils";
 import z from "zod";
 import { ParagraphLink } from "../shared/para-with-link";
+import { FORM_CLASSNAME } from "./auth-page";
 
-export const SignUpForm = () => {
+type SignUpFormProps = {
+  className?: HTMLFormElement["className"];
+};
+
+export const SignUpForm = ({ className }: SignUpFormProps) => {
   const t = useTranslations("AuthForm");
 
   const router = useRouter();
@@ -86,66 +92,64 @@ export const SignUpForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="name"
-          control={control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="email">{t("name")}</FieldLabel>
-              <Input
-                {...field}
-                id="name"
-                aria-invalid={fieldState.invalid}
-                placeholder="AmazingJoe"
-                autoComplete="off"
-              />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
-          )}
-        />
-        <Controller
-          name="email"
-          control={control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="email">{t("email")}</FieldLabel>
-              <Input
-                {...field}
-                id="email"
-                aria-invalid={fieldState.invalid}
-                placeholder="joe@acme.com"
-                autoComplete="off"
-                type="email"
-              />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
-          )}
-        />
-        <Controller
-          name="password"
-          control={control}
-          render={({ field, fieldState }) => (
-            <Field data-invalid={fieldState.invalid}>
-              <FieldLabel htmlFor="password">{t("password")}</FieldLabel>
-              <Input
-                {...field}
-                id="password"
-                type="password"
-                aria-invalid={fieldState.invalid}
-                autoComplete="off"
-              />
-              {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
-            </Field>
-          )}
-        />
-        <Button type="submit">{t("signup")}</Button>
-        <ParagraphLink
-          translationKey="AuthForm.account_exists"
-          href="/sign-in"
-        />
-      </form>
-    </>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn(FORM_CLASSNAME, className)}
+    >
+      <Controller
+        name="name"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="email">{t("name")}</FieldLabel>
+            <Input
+              {...field}
+              id="name"
+              aria-invalid={fieldState.invalid}
+              placeholder="AmazingJoe"
+              autoComplete="off"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Controller
+        name="email"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="email">{t("email")}</FieldLabel>
+            <Input
+              {...field}
+              id="email"
+              aria-invalid={fieldState.invalid}
+              placeholder="joe@acme.com"
+              autoComplete="off"
+              type="email"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Controller
+        name="password"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Field data-invalid={fieldState.invalid}>
+            <FieldLabel htmlFor="password">{t("password")}</FieldLabel>
+            <Input
+              {...field}
+              id="password"
+              type="password"
+              aria-invalid={fieldState.invalid}
+              autoComplete="off"
+            />
+            {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+          </Field>
+        )}
+      />
+      <Button type="submit">{t("signup")}</Button>
+      <ParagraphLink translationKey="AuthForm.account_exists" href="/sign-in" />
+    </form>
   );
 };
