@@ -23,8 +23,12 @@ jobs:
           --health-retries 5
 
     env:
-      DATABASE_URL: "postgresql://e2e:test@localhost:5432/test"
+      DATABASE_URL: "postgresql://test:test@localhost:5432/test"
       E2E_TESTS: 1
+      BETTER_AUTH_SECRET: "AYM6nyhvQG6wrJ2gyeGSfjHjNkxwDv+jwXOqLxIKqV8="
+      BETTER_AUTH_URL: "http://localhost:3000"
+      RESEND_API_KEY: ""
+      APP_DOMAIN: "http://localhost:3000"
 
     timeout-minutes: 60
     runs-on: ubuntu-latest
@@ -32,9 +36,6 @@ jobs:
       - uses: actions/checkout@v6
 
       - uses: ./.github/actions/setup-project
-
-      - name: Load .env.test into workflow env
-        run: cat .env.test >> $GITHUB_ENV
 
       - name: Run migrations
         run: bun run db:migrate
