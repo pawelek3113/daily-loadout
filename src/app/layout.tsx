@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: { template: "%s | dailyloadout", default: "dailyloadout" },
-  description: "dailyloadout app",
+  title: { template: "%s | aidly", default: "aidly" },
+  description: "aidly app",
 };
 
 export default async function RootLayout({
