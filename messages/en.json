@@ -10,7 +10,7 @@
   "AuthForm": {
     "email": "Email",
     "password": "Password",
-    "name": "Name",
+    "username": "Username",
     "otp": "Code",
     "login": "Log in",
     "signup": "Sign up",
@@ -42,10 +42,11 @@
         "nonempty": "Password must not be empty, please type in your password",
         "min": "Too short, please provide a longer password"
       },
-      "name": {
-        "min": "Too short, please provide a longer name",
-        "max": "Too long, please provide a shorter name",
-        "nonempty": "Name must not be empty, please type in your name"
+      "username": {
+        "min": "Too short, please provide a longer username",
+        "max": "Too long, please provide a shorter username",
+        "nonempty": "Username must not be empty, please type in your username",
+        "invalid": "Username must not contain any whitespaces (e.g. spaces)"
       },
       "otp": "Incorrect token",
       "reset_password": {

@@ -10,7 +10,7 @@
   "AuthForm": {
     "email": "Email",
     "password": "Hasło",
-    "name": "Nazwa",
+    "username": "Nazwa użytkownika",
     "otp": "Kod",
     "login": "Zaloguj się",
     "signup": "Zarejestruj się",
@@ -42,10 +42,11 @@
         "nonempty": "Hasło nie może być puste, proszę wprowadź swoje hasło",
         "min": "Za krótkie, proszę podaj dłuższe hasło"
       },
-      "name": {
-        "min": "Za krótka, proszę podaj dłuższą nazwę",
-        "max": "Za długa, proszę podaj krótszą nazwę",
-        "nonempty": "Nazwa nie może być pusta, proszę wprowadź swoją nazwę"
+      "username": {
+        "min": "Za krótka, proszę podaj dłuższą nazwę użytkownika",
+        "max": "Za długa, proszę podaj krótszą nazwę użytkownika",
+        "nonempty": "Nazwa użytkownika nie może być pusta, proszę wprowadź swoją nazwę",
+        "invalid": "Nazwa użytkownika nie powinna zawierać żadnych białych znaków (np. spacji)"
       },
       "otp": "Niepoprawny kod",
       "reset_password": {

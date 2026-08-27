@@ -14,8 +14,8 @@ import { Controller, useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
 import z from "zod";
 import { ParagraphLink } from "../shared/para-with-link";
-import { FORM_CLASSNAME } from "./auth-page";
 import { PasswordInput } from "../ui/input-password";
+import { FORM_CLASSNAME } from "./auth-page";
 
 type SignUpFormProps = {
   className?: HTMLFormElement["className"];
@@ -29,11 +29,12 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
   const formSchema = useMemo(
     () =>
       z.object({
-        name: z
+        username: z
           .string()
-          .nonempty(t("errors.name.nonempty"))
-          .min(2, t("errors.name.min"))
-          .max(32, t("errors.name.max")),
+          .nonempty(t("errors.username.nonempty"))
+          .min(2, t("errors.username.min"))
+          .max(32, t("errors.username.max"))
+          .regex(/^\S+$/, t("errors.username.invalid")),
         email: z.email({ error: t("errors.email") }),
         password: z
           .string()
@@ -48,17 +49,17 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
   const { control, handleSubmit, setError } = useForm<SignUpFormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      username: "",
       email: "",
       password: "",
     },
     mode: "onTouched",
   });
 
-  const onSubmit = async ({ name, email, password }: SignUpFormData) => {
+  const onSubmit = async ({ username, email, password }: SignUpFormData) => {
     const { error } = await authClient.signUp.email({
       email,
-      name,
+      name: username,
       password,
     });
 
@@ -98,17 +99,17 @@ export const SignUpForm = ({ className }: SignUpFormProps) => {
       className={cn(FORM_CLASSNAME, className)}
     >
       <Controller
-        name="name"
+        name="username"
         control={control}
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
-            <FieldLabel htmlFor="email">{t("name")}</FieldLabel>
+            <FieldLabel htmlFor="username">{t("username")}</FieldLabel>
             <Input
               {...field}
-              id="name"
+              id="username"
               aria-invalid={fieldState.invalid}
               placeholder="AmazingJoe"
-              autoComplete="name"
+              autoComplete="username"
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
