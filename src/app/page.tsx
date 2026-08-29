@@ -1,3 +1,4 @@
+import { Logo } from "@/components/brand/logo";
 import { LanguageToggleButton } from "@/components/shared/language-toggle-button";
 import { SignOutButton } from "@/components/shared/TEST-ONLY-sign-out-button";
 import { ThemeToggleButton } from "@/components/shared/theme-toggle-button";
@@ -15,6 +16,7 @@ export default async function Home() {
       <Link href="/sign-up">sign up</Link>
       <Link href="/sign-in">sign in</Link>
       <SignOutButton />
+      <Logo />
     </main>
   );
 }

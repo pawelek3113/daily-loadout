@@ -52,6 +52,8 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-brand-secondary: var(var(--brand-secondary));
+  --color-brand-accent: var(var(--brand-accent));
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
@@ -73,14 +75,19 @@
   --card-foreground: oklch(0.147 0.004 49.25);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.147 0.004 49.25);
-  --primary: oklch(0.555 0.163 48.998);
+
+  --primary: oklch(66.013% 0.1884 45.083);
   --primary-foreground: oklch(0.987 0.022 95.277);
+
+  --brand-secondary: oklch(67.43% 0.11555 206.675);
+  --brand-accent: oklch(44.676% 0.08921 53.638);
+
   --secondary: oklch(0.967 0.001 286.375);
   --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.97 0.001 106.424);
-  --muted-foreground: oklch(0.553 0.013 58.071);
   --accent: oklch(0.97 0.001 106.424);
   --accent-foreground: oklch(0.216 0.006 56.043);
+  --muted: oklch(0.97 0.001 106.424);
+  --muted-foreground: oklch(0.553 0.013 58.071);
   --success: oklch(55% 0.16 145);
   --success-muted: oklch(95% 0.035 145);
   --success-muted-2: oklch(83% 0.1 145);
@@ -124,14 +131,19 @@
   --card-foreground: oklch(0.985 0.001 106.423);
   --popover: oklch(0.216 0.006 56.043);
   --popover-foreground: oklch(0.985 0.001 106.423);
-  --primary: rgb(151, 60, 0);
+
+  --primary: oklch(55.703% 0.15827 45.348);
   --primary-foreground: oklch(0.987 0.022 95.277);
+
+  --brand-secondary: oklch(67.43% 0.11555 206.675);
+  --brand-accent: oklch(44.676% 0.08921 53.638);
+
   --secondary: oklch(0.274 0.006 286.033);
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.268 0.007 34.298);
-  --muted-foreground: oklch(0.709 0.01 56.259);
   --accent: oklch(0.268 0.007 34.298);
   --accent-foreground: oklch(0.985 0.001 106.423);
+  --muted: oklch(0.268 0.007 34.298);
+  --muted-foreground: oklch(0.709 0.01 56.259);
   --success: oklch(78% 0.17 150);
   --success-muted: oklch(27% 0.07 150);
   --success-muted-2: oklch(45% 0.1 150);
