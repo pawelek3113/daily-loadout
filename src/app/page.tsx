@@ -16,9 +16,11 @@ export default async function Home() {
       <Link href="/sign-up">sign up</Link>
       <Link href="/sign-in">sign in</Link>
       <SignOutButton />
-      <Logo size="large" />
-      <Logo size="default" />
-      <Logo size="small" />
+      <Logo />
+      <Logo size="default" color="brand" style="shadowed" />
+      <Logo size="default" color="mono" />
+      <Logo size="small" color="white" />
+      <Logo size="small" color="black" />
     </main>
   );
 }
