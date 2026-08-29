@@ -1,11 +1,37 @@
-export const Logo = () => {
+import { cn } from "@/lib/utils";
+import { cva, VariantProps } from "class-variance-authority";
+import { SVGAttributes } from "react";
+
+type LogoProps = {
+  className?: SVGAttributes<SVGElement>["className"];
+} & VariantProps<typeof logoVariants>;
+
+const logoVariants = cva("", {
+  variants: {
+    // color: {
+    //   default: "",
+    //   mono: "text-foreground",
+    //   white: "text-white",
+    //   black: "text-black",
+    // },
+    size: {
+      default: "h-6",
+      large: "h-8",
+      small: "h-4",
+    },
+  },
+  defaultVariants: {
+    size: "default",
+    // color: "default",
+  },
+});
+export const Logo = ({ size = "default", className }: LogoProps) => {
   return (
     <svg
-      width="47"
-      height="17"
       viewBox="0 0 47 17"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className={cn(logoVariants({ size, className }))}
     >
       <path
         d="M3.6 13.68C2.49333 13.68 1.61333 13.4333 0.960001 12.94C0.320001 12.4333 6.14673e-07 11.6333 6.14673e-07 10.54C6.14673e-07 10.3133 0.013334 10.08 0.0400006 9.84C0.0666673 9.6 0.106667 9.34666 0.160001 9.08C0.400001 8 0.800001 7.06666 1.36 6.28C1.92 5.48 2.59333 4.86666 3.38 4.44C4.16667 4.01333 5.01333 3.8 5.92 3.8C6.42667 3.8 6.86667 3.86666 7.24 3.99999C7.61333 4.12 7.90667 4.27333 8.12 4.46L8.22 3.99999H11.98L9.98 13.48H6.72L6.68 12.74C6.24 13.0333 5.77333 13.2667 5.28 13.44C4.78667 13.6 4.22667 13.68 3.6 13.68ZM5.26 10.96C5.55333 10.96 5.84 10.9133 6.12 10.82C6.4 10.7133 6.64667 10.5667 6.86 10.38L7.58 7.02C7.28667 6.68666 6.86 6.52 6.3 6.52C5.14 6.52 4.37333 7.38 4 9.1C3.92 9.43333 3.88 9.72 3.88 9.96C3.88 10.3333 3.98667 10.5933 4.2 10.74C4.41333 10.8867 4.76667 10.96 5.26 10.96Z"
